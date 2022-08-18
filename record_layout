@@ -1,0 +1,34 @@
+Column Name		Beg Pos	End Pos  Datatype
+----------------------  ------- -------  --------
+equipment_initial	  001     004    alpha
+equipment_number          005     014    numeric
+event_code                015     016    numeric
+event_code_alpha          017     020    alpha
+cancel_date               021     030    date
+event_date                031     048    datetime  (yyyy-mm-ddhh.mm.ss)
+fsac                      049     054    numeric
+load_empty                055     055    alpha
+train_id                  056     065    alpha-numeric
+company_abbreviation      066     069    alpha
+carrier_abbreviation      070     073    alpha
+waybill_id                074     099    alpha-numeric
+waybill_version           100     102    numeric
+railroad_event_code       103     104    alpha-numeric
+railroad_event_state_code 105     106    alpha
+joint_service_code        107     107    alpha-numeric
+end_of_record_constant    108     108    'X'
+
+
+1.  Records are 108 bytes + record delimiter.
+2.  Fixed width fields as defined in the record layout above.
+3.  Use appropriate Python datatypes for the dataframe based on the specified Datatype above.
+4.  event_date format is for the source data.  Standard datetime format is okay for dataframe.
+5.  Trim all columns of leading and trailing spaces with the exception of train_id.
+6.  You may encounter data errors upon import when trying to transform the datatype.
+    - If you encounter errors isolate rows with errors to a different dataframe.
+    - Identify column(s) with errors.
+7.  The following columns cannot be null.
+    - equipment_initial
+    - equipment_number
+    - event_code_alpha
+    - event_date
