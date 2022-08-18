@@ -3,3 +3,4 @@
 #1. CONNECT TO THE SOURCE FILES AND READ THEM
 #2. PROCESS THE FILES, i.e at the end create a dataframe for insights
 #3. PUSH IT BACK TO THE GIT REPO
+#4. Test the push and pull (sync) again
