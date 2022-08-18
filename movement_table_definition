@@ -1,0 +1,67 @@
+***** movement table *****
+
+FileName		string
+ProcessDatetime		timestamp
+EquipmentInitial	string
+EquipmentNumber		int
+ReportType              string
+ReportingRoad		string
+LoadStatus		string
+TrainID			string
+EventDate		date
+EventDatetime		timestamp
+City                    string
+State                   string
+SPLC                    int
+FromRoad                string
+ToRoad                  string
+WaybillId               string
+WaybillVersion          string
+JointServiceCode        string
+ClientEventCode         string
+
+
+
+
+***** JSON Mapping *****
+source file name	==>	FileName
+execution date time	==> 	ProcessDatetime
+equipment_initial	==>	EquipmentInitial
+equipment_number 	==>	EquipmentNumber
+report_type             ==>	ReportType
+carrier			==>	ReportingRoad
+load_status		==>	LoadStatus
+train_id		==>	TrainID
+event_datetime		==>	EventDate
+event_datetime		==>	EventDatetime
+splc			==>	SPLC
+from_carrier_code	==>	FromRoad
+to_carrier_code		==>	ToRoad
+concatenate(carrier, waybill_number, interchange_timestamp)	==>	WaybillId
+shipment_qualifier	==>	JointServiceCode
+
+
+***** Special Instructions *****
+1. Preference is to use Databricks (community edition if you do not have access to a Databricks account)
+2. Store the results in a Delta table if using Databricks; otherwise, parquet table.
+3. Create a row for each equipment.
+4. All string fields should be trimmed of leading and trailing spaces with the exception of the train_ID (TrainID).
+5. The event_datetime field should be adjusted for time zone based on the carrier_timezone value.  
+   - If you are unable to do this adjustment then just use the event_datetime.
+6. Multple splc fields exist.  Use the value from event.splc.
+7. Only populate FromRoad and ToRoad if report_type (ReportType) is either 'ICHD' or 'ICHR'; otherwise, the fields should be null.
+8. Any field not having a value (spaces) should be NULL.
+9. structure of the source file
+   - carrier and event data (applies to all equipment)
+   -- v1.0.1: contains list of equipment to which this event applies
+   --- interchange:  interchange information for the equipment (going from one railroad to another)
+   --- various equipment fields
+   --- waybill:  waybill data  (various information about the shipment)
+   ---- waybill_parties:  list of waybill parties involved in the shipment
+   ---- route:  list of route information
+   ---- origin_station:  various information about the origin
+   ---- destination_station:  various information about the destination
+   ---- shipment_qualier:  identifies the type of shipment
+10.  if you don't have a favorite JSON viewr here is a convenient one:  http://jsonviewer.stack.hu/
+
+	
