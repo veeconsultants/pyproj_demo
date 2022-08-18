@@ -1,0 +1,5 @@
+#Let us learn what we are doing here.
+#There are 3 main pieces of the puzzle
+#1. CONNECT TO THE SOURCE FILES AND READ THEM
+#2. PROCESS THE FILES, i.e at the end create a dataframe for insights
+#3. PUSH IT BACK TO THE GIT REPO
